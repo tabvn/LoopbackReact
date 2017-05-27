@@ -1,0 +1,40 @@
+{
+  "name": "ar",
+  "version": "1.0.0",
+  "description": "Ar Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run build && babel-node src/server.js",
+    "start:dev": "export NODE_ENV=development && npm run build:dev && nodemon --exec babel-node -- src/server.js",
+    "start:universal": "export UNIVERSAL=true && npm run start",
+    "start:dev:universal": "export NODE_ENV=development && export UNIVERSAL=true && npm run start:dev",
+    "build": "NODE_ENV=production webpack -p",
+    "build:dev": "webpack -d",
+    "build:dev:watch": "webpack -d --watch"
+  },
+  "author": "Ar",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "ejs": "^2.5.2",
+    "express": "5.0.0-alpha.5",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-router-dom": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.4.1",
+    "babel-register": "^6.18.0",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "nodemon": "^1.11.0",
+    "webpack": "2.2.1"
+  }
+}
