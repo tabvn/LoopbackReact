@@ -7,9 +7,11 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node server/server.js",
+    "start": "npm run build:dev && node server/client/src/server.js",
+    "production": "npm run build:prod && node server/client/src/server.js",
     "posttest": "npm run lint && nsp check",
-    "build:app": "cd client && npm start"
+    "build:dev": "cd client && npm start",
+    "build:prod": "cd client && npm run start:universal"
   },
   "dependencies": {
     "compression": "^1.0.3",

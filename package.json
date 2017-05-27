@@ -1,0 +1,19 @@
+{
+  "name": "addictionrecovery",
+  "version": "1.0.0",
+  "description": "addictionrecovery ",
+  "main": "server/server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tabvn/LoopbackReact.git"
+  },
+  "author": "Toan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tabvn/LoopbackReact/issues"
+  },
+  "homepage": "https://github.com/tabvn/LoopbackReact#readme"
+}
