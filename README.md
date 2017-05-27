@@ -1,4 +1,5 @@
-# LoopbackReact
+# Loopback React Universal Server rendering
+
 ## Setup
 ``` git clone git@github.com:tabvn/LoopbackReact.git app ```
 
