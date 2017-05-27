@@ -10,8 +10,8 @@
     "start": "npm run build:dev && node server/client/src/server.js",
     "production": "npm run build:prod && node server/client/src/server.js",
     "posttest": "npm run lint && nsp check",
-    "build:dev": "cd client && npm start",
-    "build:prod": "cd client && npm run start:dev:universal"
+    "build:dev": "cd client && npm run start:dev:universal",
+    "build:prod": "cd client && start:universal"
   },
   "dependencies": {
     "compression": "^1.0.3",

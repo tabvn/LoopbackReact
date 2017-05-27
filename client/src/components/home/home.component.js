@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-
+import {withCookies, Cookies} from 'react-cookie';
+import {Button, Card, CardTitle, CardText, CardActions, CardMenu, IconButton} from 'react-mdl';
 
 class Home extends Component {
 
@@ -17,6 +18,11 @@ class Home extends Component {
 
   componentDidMount() {
 
+    const {cookies} = this.props;
+
+    this.state = {
+      name: cookies.get('name') || 'Ben'
+    };
 
 
     axios.get(`http://0.0.0.0:3000/api/tests`)
@@ -31,25 +37,56 @@ class Home extends Component {
 
   render() {
 
-    console.log(this.props);
 
     const {posts} = this.state;
-    return <div>
-      <button onClick={() => this.logout}>Logout</button>
-      <h1>Blogs</h1>
-      {posts.map((post, index) =>
-        <article key={index}><h2><Link to={"/post/" + post.id}>{post.title}</Link></h2><p>{post.body}</p></article>
-      )}
+    return <div className="posts" style={{
+      margin: '0 auto',
+      width: '600px'
+    }}>
+      <button onClick={() => this.addPost()}>Add {this.state.name}</button>
 
-    </div>
+        <h1>Our Posts</h1>
+        {posts.map((post, index) =>
+          <Card key={index} shadow={0} style={{
+            marginBottom: '20px',
+            width: '100%'
+          }}>
+            <CardTitle style={{
+              color: '#fff',
+            }}><Link to={"/post/" + post.id}>{post.title}</Link></CardTitle>
+            <CardText>
+              {post.body}
+            </CardText>
+            <CardActions border>
+              <Link className="mdl-button mdl-js-button mdl-button--colored" to={"/post/" + post.id}>Read more</Link>
+            </CardActions>
+            <CardMenu style={{color: '#fff'}}>
+              <IconButton name="share"/>
+            </CardMenu>
+          </Card>
+        )}
+      </div>
 
 
-  }
+      }
 
-  logout() {
-    console.log("User pressed logout");
-  }
+      addPost() {
 
-}
+      const posts = this.state.posts;
+      const newPost = {title: "New Post", body: "Content of the new post"};
+      posts.push(newPost);
 
-export default Home;
+      this.setState(posts);
+
+      const {cookies} = this.props;
+
+      const name = "Toan " + posts.length;
+      cookies.set('name', name, {path: '/'});
+      this.setState({name});
+
+
+    }
+
+      }
+
+      export default withCookies(Home);

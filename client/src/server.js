@@ -1,7 +1,8 @@
 import path from 'path';
 import React from 'react';
-import {renderToString} from 'react-dom/server';
-import {StaticRouter as Router} from 'react-router-dom';
+import {renderToString, renderToStaticMarkup} from 'react-dom/server';
+import {StaticRouter} from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 import App from './components/App';
 
 const app = require('../../server/server');
@@ -18,7 +19,8 @@ const routes = [
   '/',
   '/about',
   '/news',
-  '/post/:id'
+  '/post/:id',
+  '/login'
 ];
 
 var renderService = function (path) {
@@ -30,10 +32,12 @@ var renderService = function (path) {
 
     if (process.env.UNIVERSAL) {
       const context = {};
-      markup = renderToString(
-        <Router location={req.url} context={context}>
-          <App />
-        </Router>,
+      markup = renderToStaticMarkup(
+        <CookiesProvider cookies={req.universalCookies}>
+          <StaticRouter location={req.url} context={context}>
+            <App />
+          </StaticRouter>
+        </CookiesProvider>,
       );
 
       // context.url will contain the URL to redirect to if a <Redirect> was used
